@@ -9,6 +9,8 @@ module Common ( readInput
               , unique
               , splitOnceOn
               , mapModify
+              , assert
+              , doAssert
               ) where
 
 import System.Environment (getArgs, getProgName)
@@ -89,3 +91,11 @@ splitOnceOn delimiter xs = case go [] xs of
 
 mapModify :: Ord a => a -> (b -> b) -> M.Map a b -> M.Map a b
 mapModify k f m = M.insert k (f $ m M.! k) m
+
+assert :: Bool -> String -> a -> a
+assert False msg _ = error msg
+assert True _ val  = val
+
+doAssert :: Bool -> String -> IO ()
+doAssert False msg = error msg
+doAssert True _    = return ()
