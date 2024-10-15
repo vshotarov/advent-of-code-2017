@@ -67,5 +67,6 @@ $real_input
 -}" >> "$name/Main.hs" &&
 echo "$cabal_template" >> advent-of-code.cabal &&
 echo "Initialized $name" &&
+echo "Started $1 at `date`" >> LOG
 cabal run $name &>/dev/null &
 gvim -v "$name/Main.hs"
