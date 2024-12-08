@@ -11,6 +11,7 @@ module Common ( readInput
               , mapModify
               , assert
               , doAssert
+              , mapTuple
               ) where
 
 import System.Environment (getArgs, getProgName)
@@ -99,3 +100,6 @@ assert True _ val  = val
 doAssert :: Bool -> String -> IO ()
 doAssert False msg = error msg
 doAssert True _    = return ()
+
+mapTuple :: (a -> b) -> (a, a) -> (b, b)
+mapTuple f (a1, a2) = (f a1, f a2)
